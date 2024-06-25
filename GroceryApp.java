@@ -1,10 +1,10 @@
-// Team members: Ashley Wu and Andrew Blair
+// Team members: Ashley Wu
 // Course number: CSC 210
 // Course section: 0900
 // Description: This is the GroceryApp FX that displays the login and
 // menu windows using the GroceryStore class.
-// Date: 05/15/2024
-// Version: Last version
+// Date: 06/10/2024
+// Version: Last version (second version)
 
 package org.example.chapter12;
 
@@ -17,12 +17,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+import javafx.scene.control.PasswordField;
+import javafx.geometry.HPos;
 
 
 public class GroceryApp extends Application {
     // Fields
     private TextField userTextField;
-    private TextField passwordTextField;
+    private PasswordField passwordField;
     private Label messageLabel;
     private TextField productNumTextField;
     private TextField quantityTextField;
@@ -43,35 +45,60 @@ public class GroceryApp extends Application {
         Label promptLabel1 = new Label("Username: ");
         Label promptLabel2 = new Label("Password: ");
 
+        // Changing and styling font
+        promptLabel1.setStyle("-fx-text-fill: blue; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        promptLabel2.setStyle("-fx-text-fill: blue; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+
         // Create a TextFields for input of username and password.
         userTextField = new TextField();
-        passwordTextField = new TextField();
+        passwordField = new PasswordField();
+
+        // Style the TextField
+        userTextField.setStyle("-fx-font-family: 'Georgia'; -fx-font-size: 16; -fx-text-fill: black; " +
+                "-fx-background-color: lightgrey; -fx-border-color: blue; -fx-border-radius: 5; " +
+                "-fx-alignment: center;");
+        passwordField.setStyle("-fx-font-family: 'Georgia'; -fx-font-size: 16; -fx-text-fill: black; " +
+                "-fx-background-color: lightgrey; -fx-border-color: blue; -fx-border-radius: 5; " +
+                "-fx-alignment: center;");
 
         // Create a Button to perform the Login.
         Button LoginButton = new Button("Login");
+
+        // Set button style using setStyle method
+        LoginButton.setStyle("-fx-font-family: 'Georgia'; -fx-background-color: green; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;");
+
 
         // Register the event handler.
         LoginButton.setOnAction(new LoginButtonHandler());
 
         // Create an empty Label to display the message.
         messageLabel = new Label();
+        // Style the messageLabel
+        messageLabel.setStyle("-fx-text-fill: red; -fx-font-family: 'Georgia'; -fx-font-size: 14px; -fx-font-weight: bold;");
 
         GridPane gridPane = new GridPane();
+        gridPane.setAlignment(javafx.geometry.Pos.CENTER); // for center
+        gridPane.setHgap(10); // Horizontal gap between cells
+        gridPane.setVgap(10); // Vertical gap between cells
         gridPane.add(promptLabel1, 0, 0);
         gridPane.add(promptLabel2, 0, 1);
         gridPane.add(userTextField, 1, 0);
-        gridPane.add(passwordTextField, 1, 1);
+        gridPane.add(passwordField, 1, 1);
         gridPane.add(LoginButton, 1, 2);
-        gridPane.add(messageLabel, 0, 3);
+        gridPane.add(messageLabel, 1, 3);
 
         // Create a Scene.
-        Scene scene = new Scene(gridPane);
+        Scene scene = new Scene(gridPane, 400, 300);
 
         // Add the Scene to the Stage.
         primaryStage.setScene(scene);
 
         // Set the stage title.
         primaryStage.setTitle("Login");
+
+        // Set the stage width and height.
+        primaryStage.setWidth(400);
+        primaryStage.setHeight(300);
 
         // Show the window.
         primaryStage.show();
@@ -93,7 +120,7 @@ public class GroceryApp extends Application {
         // setting userTextField
         String user = userTextField.getText();
         // setting passwordTextField
-        String password = passwordTextField.getText();
+        String password = passwordField.getText();
 
         // if user and password are the same as the ones in the GroceryStore class
         if (user.equals(GroceryStore.getUsername()) && password.equals(GroceryStore.getPassword())) {
@@ -113,10 +140,10 @@ public class GroceryApp extends Application {
         // Create a Labels to display products and their cost, and number.
         Label prompt1 = new Label("Products");
         Label prompt2 = new Label("Cost");
-        Label num1 = new Label("                                               1");
-        Label num2 = new Label("                                               2");
-        Label num3 = new Label("                                               3");
-        Label num4 = new Label("                                               4");
+        Label num1 = new Label("1");
+        Label num2 = new Label("2");
+        Label num3 = new Label("3");
+        Label num4 = new Label("4");
         Label product1 = new Label("Tuna");
         Label product2 = new Label("Milk");
         Label product3 = new Label("Bread");
@@ -128,12 +155,42 @@ public class GroceryApp extends Application {
         Label prompt3 = new Label("Enter the number for the product ");
         Label prompt4 = new Label("Enter the quantity for the product ");
 
+        // Changing and styling font
+        prompt1.setStyle("-fx-text-fill: blue; -fx-font-family: 'Impact'; -fx-font-weight: bold; -fx-font-size: 30px;");
+        prompt2.setStyle("-fx-text-fill: blue; -fx-font-family: 'Impact'; -fx-font-weight: bold; -fx-font-size: 30px;");
+        num1.setStyle("-fx-text-fill: orange; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        num2.setStyle("-fx-text-fill: orange; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        num3.setStyle("-fx-text-fill: orange; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        num4.setStyle("-fx-text-fill: orange; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        product1.setStyle("-fx-text-fill: black; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        product2.setStyle("-fx-text-fill: black; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        product3.setStyle("-fx-text-fill: black; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        product4.setStyle("-fx-text-fill: black; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        cost1.setStyle("-fx-text-fill: black; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        cost2.setStyle("-fx-text-fill: black; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        cost3.setStyle("-fx-text-fill: black; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        cost4.setStyle("-fx-text-fill: black; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 20px;");
+        prompt3.setStyle("-fx-text-fill: gray; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 15px;");
+        prompt4.setStyle("-fx-text-fill: gray; -fx-font-family: 'Georgia'; -fx-font-weight: bold; -fx-font-size: 15px;");
+
+
         // Create a TextFields for input of product number and quantity.
         productNumTextField = new TextField();
         quantityTextField = new TextField();
 
+        // Style the TextField
+        productNumTextField.setStyle("-fx-font-family: 'Georgia'; -fx-font-size: 20; -fx-text-fill: black; " +
+                "-fx-background-color: lightgrey; -fx-border-color: blue; -fx-border-radius: 5;" +
+                "-fx-alignment: center;");
+        quantityTextField.setStyle("-fx-font-family: 'Georgia'; -fx-font-size: 20; -fx-text-fill: black; " +
+                "-fx-background-color: lightgrey; -fx-border-color: blue; -fx-border-radius: 5; " +
+                "-fx-alignment: center;");
+
         // Create a Button to perform the Calculation.
         Button calculateButton = new Button("Calculate");
+
+        // Set button style using setStyle method
+        calculateButton.setStyle("-fx-font-family: 'Georgia'; -fx-background-color: green; -fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;");
 
         // Register the event handler.
         calculateButton.setOnAction(new calcButtonHandler());
@@ -142,6 +199,9 @@ public class GroceryApp extends Application {
         resultLabel = new Label();
 
         GridPane gridPane = new GridPane();
+        gridPane.setAlignment(javafx.geometry.Pos.CENTER); // for center
+        gridPane.setHgap(10); // Horizontal gap between cells
+        gridPane.setVgap(10); // Vertical gap between cells
         gridPane.add(prompt1, 1, 0);
         gridPane.add(prompt2, 2, 0);
         gridPane.add(num1, 0, 1);
@@ -156,21 +216,37 @@ public class GroceryApp extends Application {
         gridPane.add(cost2, 2, 2);
         gridPane.add(cost3, 2, 3);
         gridPane.add(cost4, 2, 4);
-        gridPane.add(prompt3, 0, 5);
-        gridPane.add(prompt4, 0, 6);
-        gridPane.add(productNumTextField, 1, 5);
-        gridPane.add(quantityTextField, 1, 6);
-        gridPane.add(calculateButton, 1, 7);
-        gridPane.add(resultLabel, 1, 8);
+
+        // Adding spacer Label to create some space
+        Label spacer = new Label();
+        gridPane.add(spacer, 0, 5);
+
+        gridPane.add(prompt3, 0, 6);
+        gridPane.add(prompt4, 0, 7);
+        gridPane.add(productNumTextField, 1, 6);
+        gridPane.add(quantityTextField, 1, 7);
+        gridPane.add(calculateButton, 1, 8);
+        gridPane.add(resultLabel, 1, 9);
+
+        // Align num1, num2, num3, and num4 to the right within their cells
+        GridPane.setHalignment(num1, HPos.RIGHT);
+        GridPane.setHalignment(num2, HPos.RIGHT);
+        GridPane.setHalignment(num3, HPos.RIGHT);
+        GridPane.setHalignment(num4, HPos.RIGHT);
 
         // Create a Scene.
-        Scene scene2 = new Scene(gridPane);
+        Scene scene2 = new Scene(gridPane, 800, 600);
 
         // Add the Scene to the Stage.
         primaryStage.setScene(scene2);
 
         // Set the stage title.
         primaryStage.setTitle("Menu");
+
+        // Set the stage width and height.
+        primaryStage.setWidth(800);
+        primaryStage.setHeight(600);
+
 
         // Show the window.
         primaryStage.show();
@@ -190,12 +266,14 @@ public class GroceryApp extends Application {
 
                 // if statement that display invalid if prod. number is not between 1 or 4
                 if (productNum < 1 || productNum > 4) {
-                    resultLabel.setText("Invalid product number. Please try again.");
+                    resultLabel.setText("Invalid product number. \nPlease try again.");
+                    resultLabel.setStyle("-fx-text-fill: red; -fx-font-family: 'Georgia'; -fx-font-size: 16px; -fx-font-weight: bold;");
                     return;
                 }
                 // if statement that display invalid if quantity is zero or negative values
                 else if (quantity <= 0) {
-                    resultLabel.setText("Invalid quantity number. Please try again.");
+                    resultLabel.setText("Invalid quantity number. \nPlease try again.");
+                    resultLabel.setStyle("-fx-text-fill: red; -fx-font-family: 'Georgia'; -fx-font-size: 16px; -fx-font-weight: bold;");
                     return;
                 }
 
@@ -216,15 +294,17 @@ public class GroceryApp extends Application {
                 double taxes = GroceryStore.calTaxes(item) * quantity;
                 double total = GroceryStore.calTotal(item) * quantity;
 
-                // Display the results.
-                resultLabel.setText(String.format("\nCost before taxes: " + (cost) +
-                        "\nTaxes: " + (taxes) + "\nTotal Cost: " + (total)));
+                // Display the results with two decimals.
+                resultLabel.setText(String.format("\nCost before taxes: %.2f\nTaxes: %.2f\nTotal " +
+                                "Cost: %.2f", cost, taxes, total));
+                resultLabel.setStyle("-fx-text-fill: green; -fx-font-family: 'Georgia'; -fx-font-size: 16px; -fx-font-weight: bold;");
             }
 
             // if the user input a word or character will display invalid
             catch (NumberFormatException e) // catch block statement
             {
-                resultLabel.setText("Invalid input. Please try again with numbers.");
+                resultLabel.setText("Invalid input. \nPlease try again with numbers.");
+                resultLabel.setStyle("-fx-text-fill: red; -fx-font-family: 'Georgia'; -fx-font-size: 16px; -fx-font-weight: bold;");
             }
         }
     }
